@@ -36,7 +36,7 @@ namespace TimeLecture.Controllers
                 // Если это уведомление для подтверждения адреса
                 case GroupUpdateType.Confirmation:
                     // Отправляем строку для подтверждения 
-                    return Ok(_configuration["Config:Confirmation"]);
+                    return Ok("7d529aed");
 
 
                 // Новое сообщение
