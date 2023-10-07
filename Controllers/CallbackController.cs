@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using VkNet.Abstractions;
+using VkNet.Enums.StringEnums;
 using VkNet.Model;
 using VkNet.Utils;
 
@@ -27,19 +28,19 @@ namespace TimeLecture.Controllers
         }
 
         [HttpPost]
-        public IActionResult Callback([FromBody] Updates updates)
+        public IActionResult Callback([FromBody] GroupUpdate updates)
         {
             // Проверяем, что находится в поле "type" 
-            switch (updates.Type)
+            switch (updates.Type.Value)
             {
                 // Если это уведомление для подтверждения адреса
-                case "confirmation":
+                case GroupUpdateType.Confirmation:
                     // Отправляем строку для подтверждения 
                     return Ok(_configuration["Config:Confirmation"]);
 
 
                 // Новое сообщение
-                case "message_new":
+                case GroupUpdateType.MessageNew:
                     {
                         //var msg = new VkResponse(updates.Object);
                         _vkApi.Messages.Send(new MessagesSendParams
